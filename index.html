@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farming Crops Gallery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f8f5;
+      font-family: Arial, sans-serif;
+    }
+
+    .crop-img {
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Farming Crops Gallery</h1>
+    <div class="row g-4">
+      <!-- Crop Images -->
+      <!-- Repeat this block for 20 crops -->
+      <script>
+        const crops = [
+          {
+            name: "Wheat",
+            img: "https://source.unsplash.com/400x300/?wheat",
+            details: "Wheat is a staple food grain known for its high nutrition value and global usage."
+          },
+          {
+            name: "Rice",
+            img: "https://source.unsplash.com/400x300/?rice-field",
+            details: "Rice is a primary food crop in Asia and requires flooded fields for optimal growth."
+          },
+          {
+            name: "Maize",
+            img: "https://source.unsplash.com/400x300/?corn",
+            details: "Maize, also known as corn, is used for human food, animal feed, and industrial products."
+          },
+          {
+            name: "Sugarcane",
+            img: "https://source.unsplash.com/400x300/?sugarcane",
+            details: "Sugarcane is a tropical grass used for sugar production."
+          },
+          {
+            name: "Cotton",
+            img: "https://source.unsplash.com/400x300/?cotton",
+            details: "Cotton is a soft fiber used in textiles and garments."
+          },
+          {
+            name: "Tomato",
+            img: "https://source.unsplash.com/400x300/?tomato",
+            details: "Tomato is a widely grown vegetable rich in vitamin C and lycopene."
+          },
+          {
+            name: "Potato",
+            img: "https://source.unsplash.com/400x300/?potato",
+            details: "Potato is a tuber crop rich in carbohydrates."
+          },
+          {
+            name: "Carrot",
+            img: "https://source.unsplash.com/400x300/?carrot",
+            details: "Carrot is a root vegetable known for its beta-carotene content."
+          },
+          {
+            name: "Onion",
+            img: "https://source.unsplash.com/400x300/?onion",
+            details: "Onions are bulb vegetables used for flavoring in cuisine worldwide."
+          },
+          {
+            name: "Peas",
+            img: "https://source.unsplash.com/400x300/?peas",
+            details: "Peas are leguminous crops rich in protein and nutrients."
+          },
+          {
+            name: "Soybean",
+            img: "https://source.unsplash.com/400x300/?soybean",
+            details: "Soybean is an oilseed crop with high protein content."
+          },
+          {
+            name: "Chili",
+            img: "https://source.unsplash.com/400x300/?chili",
+            details: "Chili is used as a spice for its pungency and flavor."
+          },
+          {
+            name: "Pumpkin",
+            img: "https://source.unsplash.com/400x300/?pumpkin",
+            details: "Pumpkin is a large fruit rich in vitamin A and used in cooking."
+          },
+          {
+            name: "Banana",
+            img: "https://source.unsplash.com/400x300/?banana",
+            details: "Banana is a tropical fruit crop with high potassium content."
+          },
+          {
+            name: "Mango",
+            img: "https://source.unsplash.com/400x300/?mango",
+            details: "Mango is the king of fruits, known for its sweet and juicy pulp."
+          },
+          {
+            name: "Pomegranate",
+            img: "https://source.unsplash.com/400x300/?pomegranate",
+            details: "Pomegranate is a fruit crop rich in antioxidants."
+          },
+          {
+            name: "Papaya",
+            img: "https://source.unsplash.com/400x300/?papaya",
+            details: "Papaya is a tropical fruit that helps in digestion."
+          },
+          {
+            name: "Apple",
+            img: "https://source.unsplash.com/400x300/?apple",
+            details: "Apple is a temperate fruit crop with high fiber content."
+          },
+          {
+            name: "Grapes",
+            img: "https://source.unsplash.com/400x300/?grapes",
+            details: "Grapes are used in eating and winemaking."
+          },
+          {
+            name: "Lemon",
+            img: "https://source.unsplash.com/400x300/?lemon",
+            details: "Lemon is a citrus fruit known for its vitamin C content."
+          }
+        ];
+
+        document.write(crops.map((crop, index) => `
+          <div class="col-md-3">
+            <div class="card" onclick="showDetails(${index})">
+              <img src="${crop.img}" class="card-img-top crop-img" alt="${crop.name}">
+              <div class="card-body">
+                <h5 class="card-title">${crop.name}</h5>
+              </div>
+            </div>
+          </div>
+        `).join(''));
+      </script>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="cropModal" tabindex="-1" aria-labelledby="cropModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cropModalLabel">Crop Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img id="modalImg" class="modal-img mb-3" src="" alt="">
+          <p id="modalDesc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showDetails(index) {
+      const crop = crops[index];
+      document.getElementById('cropModalLabel').innerText = crop.name;
+      document.getElementById('modalImg').src = crop.img;
+      document.getElementById('modalDesc').innerText = crop.details;
+      new bootstrap.Modal(document.getElementById('cropModal')).show();
+    }
+  </script>
+</body>
+
+</html>
